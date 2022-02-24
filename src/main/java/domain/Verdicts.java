@@ -16,6 +16,14 @@ public class Verdicts {
     }
 
     /**
+     * 판정 통과 여부를 반환한다.
+     * @return 판정 통과 여부.
+     */
+    public boolean isPassed() {
+        return getCount(VerdictType.STRIKE) == FULL_COUNT;
+    }
+
+    /**
      * 판정 결과를 보고한다.
      *
      * @return 판정 결과 보고.
