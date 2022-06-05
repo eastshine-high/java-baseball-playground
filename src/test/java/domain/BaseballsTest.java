@@ -34,19 +34,6 @@ class BaseballsTest {
         }
 
         @Nested
-        @DisplayName("숫자의 갯수가 3개가 아닌 경우")
-        class Context_with_invalid_size{
-
-            @ParameterizedTest
-            @DisplayName("IllegalArgumentException 예외를 던진다.")
-            @MethodSource("domain.BaseballsTest#testWithInvalidBaseballsSize")
-            void it_thorws_IllegalArgumentException(List<Integer> baseballs) {
-                assertThatThrownBy(() -> new Baseballs(baseballs))
-                        .isInstanceOf(IllegalArgumentException.class);
-            }
-        }
-
-        @Nested
         @DisplayName("중복된 숫자가 있을 경우")
         class Context_with_duplicate_nubmers{
             List<Integer> duplicateNubmers = Arrays.asList(3, 2, 2);
@@ -68,6 +55,19 @@ class BaseballsTest {
             @DisplayName("IllegalArgumentException 예외를 던진다.")
             void it_thorws_IllegalArgumentException() {
                 assertThatThrownBy(() -> new Baseballs(duplicateNubmers))
+                        .isInstanceOf(IllegalArgumentException.class);
+            }
+        }
+
+        @Nested
+        @DisplayName("숫자의 갯수가 3개가 아닌 경우")
+        class Context_with_invalid_size{
+
+            @ParameterizedTest
+            @DisplayName("IllegalArgumentException 예외를 던진다.")
+            @MethodSource("domain.BaseballsTest#testWithInvalidBaseballsSize")
+            void it_thorws_IllegalArgumentException(List<Integer> baseballs) {
+                assertThatThrownBy(() -> new Baseballs(baseballs))
                         .isInstanceOf(IllegalArgumentException.class);
             }
         }
