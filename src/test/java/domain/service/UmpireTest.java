@@ -3,7 +3,6 @@ package domain.service;
 import domain.Baseballs;
 import domain.VerdictType;
 import domain.Verdicts;
-import domain.service.Umpire;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
