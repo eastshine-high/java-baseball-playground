@@ -1,6 +1,7 @@
-package domain.service;
+package domain;
 
 import domain.Baseballs;
+import domain.Umpire;
 import domain.VerdictType;
 import domain.Verdicts;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,9 +1,9 @@
 package application;
 
 import domain.Baseballs;
-import domain.service.Hitter;
-import domain.service.Pitcher;
-import domain.service.Umpire;
+import domain.Hitter;
+import domain.Pitcher;
+import domain.Umpire;
 import domain.Verdicts;
 import dto.UserInputString;
 

@@ -1,7 +1,7 @@
 import controller.GameController;
-import domain.service.Hitter;
-import domain.service.Pitcher;
-import domain.service.Umpire;
+import domain.Hitter;
+import domain.Pitcher;
+import domain.Umpire;
 import application.GameService;
 import view.InputView;
 import view.ResultView;

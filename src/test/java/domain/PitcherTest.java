@@ -1,5 +1,6 @@
-package domain.service;
+package domain;
 
+import domain.Pitcher;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.RepeatedTest;

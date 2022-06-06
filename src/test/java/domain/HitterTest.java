@@ -1,6 +1,7 @@
-package domain.service;
+package domain;
 
 import domain.Baseballs;
+import domain.Hitter;
 import dto.UserInputString;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

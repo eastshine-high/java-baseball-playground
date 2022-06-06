@@ -1,4 +1,4 @@
-package domain.service;
+package domain;
 
 import domain.Baseballs;
 import dto.UserInputString;
