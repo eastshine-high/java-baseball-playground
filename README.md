@@ -1,5 +1,11 @@
 # 숫자야구게임 구현
 
+- 프로그래밍 요구사항
+- 기능 요구 사항
+- 실행 결과
+- 객체 설계
+- 기능 목록
+
 ## 프로그래밍 요구사항
 
 - **자바 코드 컨벤션을 지키면서 프로그래밍한다.**
@@ -47,7 +53,7 @@
 …
 ```
 
-## 기능 목록
+## 객체 설계
 ```
 ─── java
     ├── GameApp.java
@@ -59,21 +65,46 @@
     │   ├── Baseballs.java
     │   ├── VerdictType.java
     │   ├── Verdicts.java
-    │   └── service
-    │       ├── Hitter.java
-    │       ├── Pitcher.java
-    │       └── Umpire.java
+    │   ├── Hitter.java
+    │   ├── Pitcher.java
+    │   └── Umpire.java
     ├── dto
     │   └── UserInputString.java
     └── view
         ├── InputView.java
         └── ResultView.java
-
 ```
+
+`domain`(야구 도메인의 용어를 사용)
+
+- `Baseballs` - 일급 컬렉션, 순서가 있는 1에서 9까지 서로 다른 임의의 수 3개.
+- `Verdicts` - 일급 컬렉션, 판정 결과.
+- `Pitcher` - 숫자 야구 게임에서 컴퓨터 역할.
+- `Hitter` - 숫자 야구 게임에서 플레이어 역할(사용자 입력 문자열을 도메인 객체에 매핑).
+- `Umpire` - 컴퓨터와 플레이어의 입력 값을 판정.
+
+`application`
+
+- `GameService` - 도메인 계층의 객체들과 협력하여 야구 게임을 진행한다.
+
+`controller`
+
+- `GameController` - 게임 전체를 컨트롤한다. UI에서 받은 입력을 응용 계층에 처리를 요청한 뒤, 처리 결과를 UI에 전달한다.
+
+`dto`
+
+- `UserInputString` - 사용자 입력 문자열을 추상화.
+
+`view`
+
+- `InputView` - 게임의 입력 UI를 담당.
+- `ResultView` - 게임의 출력 UI를 담당.
+
+## 기능 목록
 
 - [x] 게임을 실행한다 - `controller/GameController#run`
   - [x] 게임을 초기화한다. - `application/GameService#initialize`
-    - [x] 1~9의 서로 다른 수 3개를 생성하여 반환한다. - `domain/service/Pitcher#pitch`
+    - [x] 1~9의 서로 다른 수 3개를 생성하여 반환한다. - `domain/Pitcher#pitch`
     - [x] '컴퓨터가 생성한 1~9의 서로 다른 수 3개(`Baseballs.pitchedBaseballs`)'를 초기화한다.
   - [x] **판정이 통과할 때까지 게임을 진행 한다.** - `./GameController#playGame`
   - [x] 게임을 완수했음을 알린다. - `view/ResultView#noticeGameCompleted`
@@ -83,23 +114,11 @@
   - [x] 사용자로부터 문자열을 입력받아 '사용자 입력 문자열(`dto/UserInputString`)'을 반환한다. - `view/InputView#askUserInputString`
     - [x] '사용자 입력 문자열(`dto/UserInputString`)'은 숫자로만 이뤄진 길이가 3인 문자열이다.
   - [x] '사용자 입력 문자열'을 판정하여 '판정 값(`domain/Verdicts`)'을 반환한다. - `application/GameService#playInning`
-    - [x] '사용자 입력 문자열(`dto/UserInputString`)''을 '사용자 입력 1~9의 서로 다른 수 3개(`Baseballs.hitBaseballs`)'로 변환하여 반환한다. - `domain/service/Hitter#hit`
-    - [x] 컴퓨터 입력 숫자들(`Baseballs.pitchedBaseballs`)과 사용자 입력 숫자들(`Baseballs.hitBaseballs`)을 비교하여 '판정 결과(`domain/Verdicts`)'를 반환한다. - `domain/service/Umpire#judgeBaseballs`
+    - [x] '사용자 입력 문자열(`dto/UserInputString`)''을 '사용자 입력 1~9의 서로 다른 수 3개(`Baseballs.hitBaseballs`)'로 변환하여 반환한다. - `domain/Hitter#hit`
+    - [x] 컴퓨터 입력 숫자들(`Baseballs.pitchedBaseballs`)과 사용자 입력 숫자들(`Baseballs.hitBaseballs`)을 비교하여 '판정 결과(`domain/Verdicts`)'를 반환한다. - `domain/Umpire#judgeBaseballs`
       - [x] 특정 위치의 숫자를 판정한다. - `./Umpire#judgeBaeeball`
         - [x] 특정 위치에 같은 숫자가 있을 경우, '스트라이크(`VerdictType.STRIKE`)'이다. - `./Umpire#isStrike`
         - [x] '스트라이크'가 아니고 다른 위치에 같은 숫자가 있는 경우, '볼(`VerdictType.BALL`)'이다. '볼'이 아닌 경우, '낫싱(`VerdictType.NOTHING`)'이다. - `./Umpire#isBall`
   - [x] 게임 결과를 출력한다. - `view/ResultView#showInningResult`
     - [x] 판정 결과를 보고한다. - `domain/Verdicts#report`
   - [x] 게임 통과 여부를 확인한다. - `domain/Verdicts#isPassed`
-
-### 도메인 객체(야구 도메인의 용어를 사용)
-
-#### `BaseballNumbers` - 일급 컬렉션, 순서가 있는 1에서 9까지 서로 다른 임의의 수 3개.
-
-#### `Verdicts` - 일급 컬렉션, 판정 결과.
-
-#### `service/Pitcher` - 숫자 야구 게임에서 상대방 역할.
-
-#### `service/Hitter` - 사용자 역할(사용자 입력 값 매퍼).
-
-#### `service/Umpire` - 컴퓨터와 사용자의 입력 값을 판정.
