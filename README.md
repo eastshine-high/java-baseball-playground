@@ -2,12 +2,26 @@
 
 ## 목차
 
+- 회고
 - 프로그래밍 요구사항
 - 기능 요구 사항
 - 실행 결과
 - 객체 설계
 - 기능 목록
-- [회고](#retrospective)
+
+## 회고 <a name ="retrospective"></a>
+
+프레임워크를 이용하지 않고 순수한 Java를 이용해 요구사항을 구현할 때, 처음 들었던 감정은 '자유'보다는 ‘혼란’이었습니다. 지금 내가 설계하고 개발하는 방법이 올바른 방법인지를 알 수 없었기 때문입니다.
+
+‘무엇이 올바른 방법인가’에 대한 고민은 [조영호님의 저서 오브젝트](https://github.com/eastshine-high/til/tree/main/books/object) 를 통해 해소할 수 있었습니다. 책은 정확히 제가 고민하던 부분에 대해 논하고 있었습니다.
+
+> 좋은 설계란 무엇인가? 우리가 짜는 프로그램은 두 가지 요구사항을 만족시켜야 한다. 오늘 완성해야 하는 기능을 구현하는 코드를 짜야 하는 동시에 내일 쉽게 변경할 수 있는 코드를 짜야한다[Sandi Metz].
+>
+
+변경에 유연하게 대응하는 코드를 위한 방법 중의 하나는 객체지향 프로그래밍입니다. 다소 추상적으로만 알고 있던 객체지향 프로그래밍은 책 오브젝트를 통해서 구체적인 코드와 함께 이해할 수 있었습니다. 특히 3장 [협력, 책임, 역할](https://github.com/eastshine-high/til/blob/main/books/object/collaboration-responsibility-role.md) 을 통해 ‘객체지향의 본질이 협력하는 객체들의 공동체를 창조하는 것’임을 깨달았습니다. 그리고 5장을 통해 [설계 품질](https://github.com/eastshine-high/til/blob/main/books/object/design-quality.md) 을 평가하는 기준들을 배우고 8-9장을 통해 협력하는 객체 사이의 의존성을 적절하게 관리하는 것을 학습하였습니다.
+
+요구사항을 개발할 때는, 학습한 내용을 적용해 보려 노력하였습니다. 예를 들어, 8-9장의 의존성 관리 부분을 적용하여 ‘의존성의 생성과 주입’을 담당하는 [GameContext](https://github.com/eastshine-high/java-baseball-playground/blob/main/src/main/java/config/GameContext.java) 객체를 구현해 보았습니다. 그리고 3장 협력, 책임, 역할을 적용하여 관심사 분리를 고민해 보며 프로그램을 구현해 나갔습니다. 최종적으로 프로그램의 구조가 도메인 주도 설계의 [LAYERED ARCHITECTURE](https://github.com/eastshine-high/til/blob/main/books/domain-driven-design/isolating-the-domain/layered-architecture.md) 와 유사한 형태를 띄면서, 객체지향 프로그래밍을 어느 정도 이해했다는 성취감을 얻을 수 있었습니다.
+
 
 ## 프로그래밍 요구사항
 
@@ -129,16 +143,3 @@
   - [x] 게임 결과를 출력 - `view/ResultView#showInningResult()`
     - [x] 판정 결과 보고 - `domain/Verdicts#report()`
   - [x] 게임 통과 여부를 확인 - `domain/Verdicts#isPassed()`
-
-## 회고 <a name ="retrospective"></a>
-
-프레임워크를 이용하지 않고 순수한 Java를 이용해 요구사항을 구현할 때, 처음 들었던 감정은 ‘혼란’이었습니다. 지금 내가 설계하고 개발하는 방법이 올바른 방법인지를 알 수 없었기 때문입니다.
-
-‘무엇이 올바른 방법인가’에 대한 고민은 [조영호님의 저서 오브젝트](https://github.com/eastshine-high/til/tree/main/books/object) 를 통해 해소할 수 있었습니다. 책은 정확히 제가 고민하던 부분에 대해 논하고 있었습니다.
-
-> 좋은 설계란 무엇인가? 우리가 짜는 프로그램은 두 가지 요구사항을 만족시켜야 한다. 오늘 완성해야 하는 기능을 구현하는 코드를 짜야 하는 동시에 내일 쉽게 변경할 수 있는 코드를 짜야한다[Sandi Metz].
->
-
-변경에 유연하게 대응하는 코드를 위한 방법 중의 하나는 객체지향 프로그래밍입니다. 다소 추상적으로만 알고 있던 객체지향 프로그래밍은 책 오브젝트를 통해서 구체적인 코드와 함께 이해할 수 있었습니다. 특히 3장 [협력, 책임, 역할](https://github.com/eastshine-high/til/blob/main/books/object/collaboration-responsibility-role.md) 을 통해 ‘객체지향의 본질이 협력하는 객체들의 공동체를 창조하는 것’임을 깨달았습니다. 그리고 5장을 통해 [설계 품질](https://github.com/eastshine-high/til/blob/main/books/object/design-quality.md) 을 평가하는 기준들을 배우고 8-9장을 통해 협력하는 객체 사이의 의존성을 적절하게 관리하는 것을 학습하였습니다.
-
-요구사항을 개발할 때는, 학습한 내용을 적용해 보려 노력하였습니다. 예를 들어, 8-9장의 의존성 관리 부분을 적용하여 ‘의존성의 생성과 주입’을 담당하는 [GameContext](https://github.com/eastshine-high/java-baseball-playground/blob/main/src/main/java/config/GameContext.java) 객체를 두었습니다. 그리고 3장 협력, 책임, 역할을 적용하여 관심사 분리를 고민해 보며 프로그램을 구현해 나갔습니다. 최종적으로 프로그램의 구조가 도메인 주도 설계의 [LAYERED ARCHITECTURE](https://github.com/eastshine-high/til/blob/main/books/domain-driven-design/isolating-the-domain/layered-architecture.md) 와 유사한 형태를 띄면서, 객체지향 프로그래밍을 어느 정도 이해했다는 성취감을 얻을 수 있었습니다.
