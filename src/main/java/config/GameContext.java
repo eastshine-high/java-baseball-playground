@@ -16,7 +16,7 @@ public class GameContext {
 
     private GameContext() { }
 
-    public static synchronized GameController getGameController() {
+    public static GameController getGameController() {
         if (gameController == null) {
             gameController = new GameController(
                     new InputView(),
