@@ -39,10 +39,9 @@ public class Baseballs {
     }
 
     private void validateRange(List<Integer> baseballs) {
-        long inValidNumbersCount = baseballs.stream()
-                .filter(number -> number < LOWER_LIMIT || number > UPPER_LIMIT)
-                .count();
-        if (inValidNumbersCount > 0) {
+        if(baseballs.stream().anyMatch(
+                number ->
+                        number < LOWER_LIMIT || number > UPPER_LIMIT)){
             throw new IllegalArgumentException(ERROR_NUMBER_RANGE);
         }
     }
